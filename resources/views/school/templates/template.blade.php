@@ -21,6 +21,16 @@
 
 		<!--Favicon da Página-->
 		<link rel="icon" type="image/png" href="{{asset('assets/imgs/favicon.png')}}">
+		<style>
+			body {
+				display: flex;
+				min-height: 100vh;
+				flex-direction: column;
+			}
+			body main {
+				flex: 1 0 auto;
+			}
+		</style>
 	</head>
 	<body>
 		<nav class="nav-header">
@@ -55,6 +65,7 @@
 		      </ul>
 
 		      <ul class="navbar-nav navbar-right menu-profile">
+				@if( auth()->check() )
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 		          	<img src="{{asset('assets/imgs/profile.png')}}" alt="Profile" class="img-profile">
@@ -62,18 +73,30 @@
 		          <ul class="dropdown-menu">
 		            <li><a href="#">Meu Perfil</a></li>
 		            <li role="separator" class="divider"></li>
-		            <li><a href="#">Sair</a></li>
+		            <li>
+						<a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Sair
+						</a>
+
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+							{{ csrf_field() }}
+						</form>
+					</li>
 		          </ul>
-		        </li>
+				</li>
+				@else
+				<li><a href="{{ route('login') }}">Entrar</a></li>
+				@endif
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav><!--End Menu-->
 
 
-		<section class="content">
+		<main class="content">
 			@yield('content')
-		</section><!--Section Content-->
+		</main><!--Section Content-->
 
 
 		<footer class="footer">

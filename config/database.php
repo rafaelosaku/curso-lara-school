@@ -51,7 +51,7 @@ return [
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'strict' => true,
-            'engine' => null,
+            'engine' => 'InnoDB',
             // solução para mysql versão > 8.0.11
             'modes'  => [
                 'ONLY_FULL_GROUP_BY',
