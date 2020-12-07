@@ -9,7 +9,7 @@
                     <div class="panel-heading">Register</div>
     
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
     
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -59,6 +59,50 @@
     
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                                <label for="image" class="col-md-4 control-label">Imagem</label>
+    
+                                <div class="col-md-6">
+                                    <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" >
+    
+                                    @if ($errors->has('image'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('image') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('token') ? ' has-error' : '' }}">
+                                <label for="token" class="col-md-4 control-label">Token</label>
+    
+                                <div class="col-md-6">
+                                    <input id="token" type="text" class="form-control" name="token" value="{{ old('token') }}">
+    
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('token') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('bibliography') ? ' has-error' : '' }}">
+                                <label for="bibliography" class="col-md-4 control-label">Bibliography</label>
+    
+                                <div class="col-md-6">
+                                    <textarea id="bibliography" type="text" class="form-control" name="bibliography">
+                                        {{ old('bibliography') }}
+                                    </textarea>
+    
+                                    @if ($errors->has('bibliography'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('bibliography') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
     
